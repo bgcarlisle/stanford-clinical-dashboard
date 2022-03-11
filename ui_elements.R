@@ -47,7 +47,7 @@ overall_design_options <- tags$head(
 )
 
 
-metric_box <- function(title, value, value_text, plot,
+metric_box <- function(title, value, value_text, plot = "",
                        info_id, info_title, info_text,
                        lim_id, lim_title, lim_text, lim_align = "left")
 {

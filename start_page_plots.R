@@ -1,92 +1,45 @@
 # Prospective registration
-plot_clinicaltrials_prereg <- function (dataset, iv_dataset, toggled_registry, color_palette) {
+plot_clinicaltrials_prereg <- function (dataset, color_palette) {
 
-    if (toggled_registry == "ClinicalTrials.gov") {
+    dataset <- dataset %>%
+        filter( ! is.na (start_date) )
+
+    dataset$start_year <- dataset$start_date %>%
+        format("%Y")
+
+    years <- seq(from=min(dataset$start_year, na.rm=TRUE), to=max(dataset$start_year, na.rm=TRUE))
+
+    plot_data <- tribble(
+        ~year, ~percentage, ~mouseover
+    )
+
+    for (current_year in years) {
+
+        numer_for_year <- dataset %>%
+            filter(
+                start_year == current_year,
+                is_prospective
+            ) %>%
+            nrow()
+
+        denom_for_year <- dataset %>%
+            filter(
+                start_year == current_year
+            ) %>%
+            nrow()
+
+        percentage_for_year <- round(100*numer_for_year/denom_for_year, digits=1)
         
-        dataset <- dataset %>%
-            filter( ! is.na (start_date) )
-
-        dataset$start_year <- dataset$start_date %>%
-            format("%Y")
-
-        years <- seq(from=min(dataset$start_year, na.rm=TRUE), to=max(dataset$start_year, na.rm=TRUE))
-
-        plot_data <- tribble(
-            ~year, ~percentage, ~mouseover
-        )
-
-        for (current_year in years) {
-
-            numer_for_year <- dataset %>%
-                filter(
-                    start_year == current_year,
-                    is_prospective
-                ) %>%
-                nrow()
-
-            denom_for_year <- dataset %>%
-                filter(
-                    start_year == current_year
-                ) %>%
-                nrow()
-
-            percentage_for_year <- round(100*numer_for_year/denom_for_year, digits=1)
-            
-            plot_data <- plot_data %>%
-                bind_rows(
-                    tribble(
-                        ~year, ~percentage, ~mouseover,
-                        current_year, percentage_for_year, paste0(numer_for_year, "/", denom_for_year)
-                    )
+        plot_data <- plot_data %>%
+            bind_rows(
+                tribble(
+                    ~year, ~percentage, ~mouseover,
+                    current_year, percentage_for_year, paste0(numer_for_year, "/", denom_for_year)
                 )
-            
-        }
+            )
         
     }
-
-    if (toggled_registry == "DRKS") {
-
-        dataset <- iv_dataset %>%
-            filter( ! is.na (start_date) ) %>%
-            filter(registry == toggled_registry) %>%
-            mutate(start_year = format(start_date, "%Y")) %>%
-            filter(start_year >= 2006)
-
-        years <- seq(from=min(dataset$start_year), to=max(dataset$start_year))
-
-        plot_data <- tribble(
-            ~year, ~percentage, ~mouseover
-        )
-
-        for (current_year in years) {
-
-            numer_for_year <- dataset %>%
-                filter(
-                    start_year == current_year,
-                    is_prospective
-                ) %>%
-                nrow()
-
-            denom_for_year <- dataset %>%
-                filter(
-                    start_year == current_year
-                ) %>%
-                nrow()
-
-            percentage_for_year <- round(100*numer_for_year/denom_for_year, digits=1)
-            
-            plot_data <- plot_data %>%
-                bind_rows(
-                    tribble(
-                        ~year, ~percentage, ~mouseover,
-                        current_year, percentage_for_year, paste0(numer_for_year, "/", denom_for_year)
-                    )
-                )
-            
-        }
-        
-    }
-        
+ 
     plot_ly(
         plot_data,
         x = ~year,
@@ -388,9 +341,9 @@ plot_clinicaltrials_timpub_2a <- function (dataset, rt, color_palette) {
             (dataset$has_followup_2y_pub & dataset$is_publication_2y)
     }
 
-    umc <- "All"
+    umc <- "Stanford"
 
-    years <- seq(from=min(dataset$completion_year), to=max(dataset$completion_year))
+    years <- seq(from=min(dataset$completion_year, na.rm=TRUE), to=max(dataset$completion_year, na.rm=TRUE))
 
     all_denom <- dataset %>%
         nrow()
@@ -493,7 +446,7 @@ plot_clinicaltrials_timpub_5a <- function (dataset, rt, color_palette) {
 
     umc <- "All"
 
-    years <- seq(from=min(dataset$completion_year), to=max(dataset$completion_year))
+    years <- seq(from=min(dataset$completion_year, na.rm=TRUE), to=max(dataset$completion_year, na.rm=TRUE))
 
     all_denom <- dataset %>%
         nrow()
@@ -524,7 +477,7 @@ plot_clinicaltrials_timpub_5a <- function (dataset, rt, color_palette) {
 
         
 
-        if (all_denom > 5) { ## This is because we only have 1 data
+        if (all_denom > 0) { ## This is because we only have 1 data
                              ## point in 2013 with 5 years of
                              ## follow-up
 
@@ -580,8 +533,7 @@ plot_opensci_oa <- function (dataset, absnum, color_palette) {
 
     dataset <- dataset %>%
         filter(
-            has_publication == TRUE,
-            publication_type == "journal publication",
+            has_publication == 1,
             !is.na(doi),
             ! is.na (publication_date_unpaywall)
         ) %>%
@@ -648,7 +600,7 @@ plot_opensci_oa <- function (dataset, absnum, color_palette) {
                 ) %>%
                 nrow()
 
-            if (year_denom > 20) {
+            if (year_denom > 0) {
                 plot_data <- plot_data %>%
                     bind_rows(
                         tribble(
@@ -785,7 +737,7 @@ plot_opensci_oa <- function (dataset, absnum, color_palette) {
                 ) %>%
                 nrow()
 
-            if (year_denom > 20) {                
+            if (year_denom > 0) {                
                 plot_data <- plot_data %>%
                     bind_rows(
                         tribble(

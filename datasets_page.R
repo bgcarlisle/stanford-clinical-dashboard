@@ -27,26 +27,10 @@ datasets_page <- tabPanel(
     "Datasets", value = "tabDatasets",
     h3("Datasets"),
     bsCollapse(
-        id="datasetPanels_prospective_reg_data",
+        id="datasetPanels_stanford_data",
         bsCollapsePanel(
-            strong("Prospective registrations data set (ClinicalTrials.gov only)"),
-            DT::dataTableOutput("data_table_pros_reg_data"),
-            style="default"
-        )
-    ),
-    bsCollapse(
-        id="datasetPanels_eutt_data",
-        bsCollapsePanel(
-            strong("EU Trials Tracker data set"),
-            DT::dataTableOutput("data_table_eutt_data"),
-            style="default"
-        )
-    ),
-    bsCollapse(
-        id="datasetPanels_iv_data",
-        bsCollapsePanel(
-            strong("IntoValue"),
-            DT::dataTableOutput("data_table_iv_data"),
+            strong("Stanford data"),
+            DT::dataTableOutput("data_table_stanford_data"),
             style="default"
         )
     )## ,
