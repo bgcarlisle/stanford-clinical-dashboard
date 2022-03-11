@@ -1,6 +1,7 @@
 *~
 data/*
 prep/*.csv
+prep/*.xlsx
 prep/prep-intovalue.R
 prep/eutt-history.R
 *.rds
