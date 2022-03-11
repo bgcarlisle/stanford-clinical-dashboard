@@ -13,32 +13,7 @@ library(gtsummary)
 library(gt)
 
 ## Load data
-
-## Generate this from the EUTT repo using the script in
-## prep/eutt-history.R
-eutt_date <- "2022-02-18"
-eutt_hist <- read_csv(
-    paste0("data/", eutt_date, "-eutt-history.csv")
-)
-
-## Data from the IntoValue 1-2 data set
-## Generate these using the script in
-## prep/transform-intovalue.R
-iv_all <- read_csv(
-    "data/ct-dashboard-intovalue-all.csv"
-)
-iv_umc <- read_csv(
-    "data/ct-dashboard-intovalue-umc.csv"
-)
-
-## Data from the prospective registration refresh
-pros_reg_data <- read_csv(
-    "data/prospective-reg-ctgov-2018-trials.csv"
-)
-
-pros_reg_data_umc <- pros_reg_data %>%
-    mutate(city = strsplit(as.character(cities), " ")) %>%
-    tidyr::unnest(city)
+stanford <- read_csv("data/2022-03-11-stanford-data.csv")
 
 ## Load functions
 source("ui_elements.R")
