@@ -16,3 +16,5 @@ prep/eutt-history.R
 clinical-dashboard.Rproj
 .RData
 .Rproj.user/
+
+rsconnect/*
