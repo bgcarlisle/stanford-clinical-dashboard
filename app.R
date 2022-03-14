@@ -141,36 +141,9 @@ server <- function (input, output, session) {
                     8,
                     h1(style = "margin-left:0cm", strong("Dashboard for clinical research transparency"), align = "left"),
                     h4(style = "margin-left:0cm",
-                       "This dashboard displays the performance of University
-                       Medical Centers (UMCs) in Germany on established registration
-                       and reporting practices for clinical research transparency.
-                       The dashboard displays data for interventional
-                       clinical trials conducted at German UMCs, registered in
-                       ClinicalTrials.gov or the German Clinical Trials Registry
-                       (DRKS), and reported as complete between 2009 - 2017. For
-                       summary results reporting, we additionally included trials
-                       conducted at German UMCs and registered in the EU Clinical
-                       Trials Register (EUCTR). The dashboard was developed as part
-                       of a scientific research project with the overall aim to support
-                       the adoption of responsible research practices at UMCs.
-                       The dashboard is a pilot and continues to be updated.
-                       More metrics may be added in the future."),
+                       "This dashboard displays the performance of North American medical schools (USA and Canada) on established registration and reporting practices for clinical research transparency. The dashboard displays data for interventional clinical trials conducted at North American medical schools, registered in ClinicalTrials.gov, and reported as complete between 2014 - 2017. The dashboard was developed as part of a scientific research project with the overall aim to support the adoption of responsible research practices at biomedical research institution. The dashboard is a pilot and continues to be updated. More metrics and more clinical trials may be added in the future."),
                     h4(style = "margin-left:0cm",
-                       HTML("The <i>Start page</i> displays data across all
-                       included UMCs. The <i>All UMCs</i> page displays the data
-                       of all UMCs side-by-side. The <i>One UMC</i> page allows you
-                       to focus on any given UMC by selecting it in the drop-down
-                       menu. The data for this UMC is then contextualized to that
-                       across all included UMCs. Besides each plot, you can
-                       find an overview of the methods and limitations by clicking
-                       on the associated widgets. For more detailed information
-                       on the methods and underlying datasets used to assess
-                       the practices displayed in this dashboard, visit the <i>Methods</i>
-                       and <i>Datasets</i> pages. The <i>Trial Characteristics</i> page
-                       provides an overview of the characteristics of trials included
-                       in the dashboard.The <i>FAQ</i> and <i>Why these practices?</i>
-                       pages provide more general information about this
-                       dashboard and our selection of practices.")),
+                       HTML("The Start page displays data across all included North American medical schools. The All Medical Schools page displays the data of all medical schools side-by-side. The One Medical School page allows you to focus on any given medical school by selecting it in the drop-down menu. The data for this medical school is then contextualized to that across all included medical schools. Besides each plot, you can find an overview of the methods and limitations by clicking on the associated widgets. For more detailed information on the methods and underlying datasets used to assess the practices displayed in this dashboard, visit the Methods and Datasets pages. The Trial Characteristics page provides an overview of the characteristics of trials included in the dashboard. The FAQ and Why these practices? pages provide more general information about this dashboard and our selection of practices.")),
                     h3(style = "margin-left:0cm; color: purple",
                        "More information on the overall aim and methodology can be
                        found in the associated publication [enter DOI]. "),
