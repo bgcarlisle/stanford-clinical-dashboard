@@ -13,7 +13,7 @@ library(gtsummary)
 library(gt)
 
 ## Load data
-stanford <- read_csv("data/2022-03-11-stanford-data.csv")
+stanford <- read_csv("data/2022-04-07-stanford-data.csv")
 
 ## Load functions
 source("ui_elements.R")
@@ -154,16 +154,16 @@ server <- function (input, output, session) {
                     hr(),
                     br(),
                     br(),
-                    actionButton(
-                        style = "color: white; background-color: #aa1c7d;",
-                        'buttonUMC',
-                        'See one UMC'
-                    ),
-                    actionButton(
-                        style = "color: white; background-color: #aa1c7d;",
-                        'buttonAllUMCs',
-                        'See all UMCs'
-                    ),
+                    ## actionButton(
+                    ##     style = "color: white; background-color: #aa1c7d;",
+                    ##     'buttonUMC',
+                    ##     'See one UMC'
+                    ## ),
+                    ## actionButton(
+                    ##     style = "color: white; background-color: #aa1c7d;",
+                    ##     'buttonAllUMCs',
+                    ##     'See all UMCs'
+                    ## ),
                     actionButton(
                         style = "color: white; background-color: #aa1c7d;",
                         'buttonMethods',
