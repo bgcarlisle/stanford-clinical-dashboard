@@ -65,6 +65,14 @@ trials$is_publication_5y <-
 trials <- trials %>%
     rename(has_publication = `any paper`)
 
+## Renames for linkage
+
+trials <- trials %>%
+    rename(has_reg_pub_link = `where: linked`)
+
+trials <- trials %>%
+    mutate(has_pubmed = ! is.na (pmid))
+
 ## Write to disk
 trials %>%
     write_csv("data/2022-04-07-stanford-data.csv")
