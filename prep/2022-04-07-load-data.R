@@ -19,16 +19,6 @@ oa <- read_csv("prep/2022-04-07-stanford-data-oa.csv")
 trials <- trials %>%
     left_join(oa, by="doi")
 
-## Determine whether the trial is prospectively registered or not
-trials$start_month <- format(as.Date(trials$start_date), "%Y-%m-01")
-
-trials$reg_month <- format(
-    as.Date(trials$registration_date, format="%d.%m.%Y"),
-    "%Y-%m-01"
-)
-
-trials$is_prospective <- trials$reg_month <= trials$start_month
-
 ## Determine the amount of follow-up
 search_date <- as.Date("2022-04-07")
 
@@ -76,3 +66,35 @@ trials <- trials %>%
 ## Write to disk
 trials %>%
     write_csv("data/2022-04-07-stanford-data.csv")
+
+## Now do the Stanford Trials Affiliation thing for the prospectively
+## registered metric
+
+stanfaff <- read_csv(
+    "prep/2022-04-08-stanford-trials-affiliations.csv"
+)
+
+## Include only 2000-2019
+
+stanfaff <- stanfaff %>%
+    filter(
+        start_date >= as.Date("2000-01-01"),
+        start_date <= as.Date("2019-12-31")
+        )
+
+## Determine whether the trial is prospectively registered or not
+stanfaff$start_month <- format(
+    as.Date(stanfaff$start_date),
+    "%Y-%m-01"
+)
+
+stanfaff$reg_month <- format(
+    as.Date(stanfaff$registration_date),
+    "%Y-%m-01"
+)
+
+stanfaff$is_prospective <- stanfaff$reg_month <= stanfaff$start_month
+
+## Write to disk
+stanfaff %>%
+    write_csv("data/2022-04-08-stanford-trials-affiliations.csv")

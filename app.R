@@ -14,6 +14,7 @@ library(gt)
 
 ## Load data
 stanford <- read_csv("data/2022-04-07-stanford-data.csv")
+stanfaff <- read_csv("data/2022-04-08-stanford-trials-affiliations.csv")
 
 ## Load functions
 source("ui_elements.R")
@@ -198,18 +199,18 @@ server <- function (input, output, session) {
 
          ## Value for prereg
 
-        stanford$start_year <- format(stanford$start_date, "%Y")
+        stanfaff$start_year <- format(stanfaff$start_date, "%Y")
 
-        max_start_year <- max(stanford$start_year)
+        max_start_year <- max(stanfaff$start_year, na.rm=TRUE)
         
                                         # Filter for max start date for the pink descriptor text
-        all_numer_prereg <- stanford %>%
+        all_numer_prereg <- stanfaff %>%
             filter(start_year == max_start_year) %>%
             filter(is_prospective) %>%
             nrow()
         
                                         # Filter for 2017 completion date for the pink descriptor text
-        all_denom_prereg <- stanford %>%
+        all_denom_prereg <- stanfaff %>%
             filter(start_year == max_start_year) %>%
             nrow()
 
@@ -695,7 +696,7 @@ server <- function (input, output, session) {
     
     ## Preregistration plot
     output$plot_clinicaltrials_prereg <- renderPlotly({
-        return (plot_clinicaltrials_prereg(stanford, color_palette))
+        return (plot_clinicaltrials_prereg(stanfaff, color_palette))
     })
     
     ## TRN plot
